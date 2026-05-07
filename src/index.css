@@ -51,6 +51,13 @@
   --color-brand-dark: #161616;
   --color-brand-gray-700: #505759;
   --color-brand-green: #b3d57d;
+
+  --color-xcreos-background: var(--xcreos-background);
+  --color-xcreos-surface: var(--xcreos-surface);
+  --color-xcreos-primary: var(--xcreos-primary);
+  --color-xcreos-primary-soft: var(--xcreos-primary-soft);
+  --color-xcreos-muted: var(--xcreos-muted);
+  --color-xcreos-border: var(--xcreos-border);
 }
 
 :root {
@@ -59,6 +66,13 @@
   --brand-dark: #161616;
   --brand-gray-700: #505759;
   --brand-green: #b3d57d;
+
+  --xcreos-background: #030303;
+  --xcreos-surface: #0b0b0b;
+  --xcreos-primary: #ff7a0d;
+  --xcreos-primary-soft: #ffb169;
+  --xcreos-muted: #8b847d;
+  --xcreos-border: #1a1a1a;
 
   --ink-0: #ffffff;
   --ink-25: #fafafa;
