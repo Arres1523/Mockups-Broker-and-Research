@@ -2,19 +2,115 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --color-xcreos-background: #030303;
-  --color-xcreos-surface: #0b0b0b;
-  --color-xcreos-primary: #ff7a0d;
-  --color-xcreos-primary-soft: #ffb169;
-  --color-xcreos-muted: #8b847d;
-  --color-xcreos-border: #1a1a1a;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink-0: var(--ink-0);
+  --color-ink-25: var(--ink-25);
+  --color-ink-50: var(--ink-50);
+  --color-ink-100: var(--ink-100);
+  --color-ink-150: var(--ink-150);
+  --color-ink-200: var(--ink-200);
+  --color-ink-300: var(--ink-300);
+  --color-ink-400: var(--ink-400);
+  --color-ink-500: var(--ink-500);
+  --color-ink-600: var(--ink-600);
+  --color-ink-700: var(--ink-700);
+  --color-ink-800: var(--ink-800);
+  --color-ink-900: var(--ink-900);
+
+  --color-copper-50: var(--copper-50);
+  --color-copper-100: var(--copper-100);
+  --color-copper-200: var(--copper-200);
+  --color-copper-400: var(--copper-400);
+  --color-copper: var(--copper);
+  --color-copper-700: var(--copper-700);
+  --color-copper-900: var(--copper-900);
+
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-ok-line: var(--ok-line);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-line: var(--warn-line);
+  --color-risk: var(--risk);
+  --color-risk-bg: var(--risk-bg);
+  --color-risk-line: var(--risk-line);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+
+  --color-brand-black: #000000;
+  --color-brand-gold: #ffd900;
+  --color-brand-dark: #161616;
+  --color-brand-gray-700: #505759;
+  --color-brand-green: #b3d57d;
 }
 
 :root {
-  color: #ffffff;
-  background: #000000;
-  font-family: 'Inter', sans-serif;
+  --brand-black: #000000;
+  --brand-gold: #ffd900;
+  --brand-dark: #161616;
+  --brand-gray-700: #505759;
+  --brand-green: #b3d57d;
+
+  --ink-0: #ffffff;
+  --ink-25: #fafafa;
+  --ink-50: #f5f5f5;
+  --ink-100: #ededed;
+  --ink-150: #e5e5e5;
+  --ink-200: #d4d4d4;
+  --ink-300: #a3a3a3;
+  --ink-400: #8f8f8f;
+  --ink-500: #666666;
+  --ink-600: #4d4d4d;
+  --ink-700: #333333;
+  --ink-800: #171717;
+  --ink-900: #0a0a0a;
+
+  --copper-50: oklch(97% 0.018 55);
+  --copper-100: oklch(94% 0.045 55);
+  --copper-200: oklch(86% 0.08 55);
+  --copper-400: oklch(68% 0.13 55);
+  --copper: oklch(56% 0.14 55);
+  --copper-700: oklch(46% 0.13 55);
+  --copper-900: oklch(30% 0.09 55);
+
+  --ok: oklch(52% 0.14 150);
+  --ok-bg: oklch(96% 0.04 150);
+  --ok-line: oklch(82% 0.1 150);
+  --warn: oklch(58% 0.13 75);
+  --warn-bg: oklch(96% 0.06 80);
+  --warn-line: oklch(82% 0.11 75);
+  --risk: oklch(54% 0.2 25);
+  --risk-bg: oklch(96% 0.04 25);
+  --risk-line: oklch(82% 0.12 25);
+  --info: oklch(52% 0.16 245);
+  --info-bg: oklch(96% 0.035 245);
+
+  --stage-1: oklch(60% 0.02 250);
+  --stage-2: var(--info);
+  --stage-3: var(--copper);
+  --stage-4: var(--ok);
+  --stage-5: oklch(46% 0.13 290);
+
+  --background: 0 0% 100%;
+  --foreground: 0 0% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 4%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 40%;
+  --border: 0 0% 93%;
+
+  color: var(--ink-900);
+  background: var(--ink-50);
+  font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,6 +119,7 @@
 
 * {
   box-sizing: border-box;
+  border-color: hsl(var(--border));
 }
 
 html {
@@ -31,15 +128,13 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at top left, rgba(255, 122, 13, 0.14), transparent 24%),
-    radial-gradient(circle at 20% 0%, rgba(120, 62, 18, 0.12), transparent 32%),
-    linear-gradient(180deg, #050505 0%, #020202 100%);
-  color: #ffffff;
+  background: var(--ink-50);
+  color: var(--ink-900);
+  letter-spacing: -0.005em;
 }
 
 body::selection {
-  background: rgba(255, 107, 0, 0.35);
+  background: color-mix(in srgb, var(--copper) 28%, transparent);
 }
 
 #root {
@@ -52,8 +147,24 @@ select {
   font: inherit;
 }
 
+.num,
+.num-mono,
+td.num,
+.financial {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
 .xcreos-scrollbar {
-  scrollbar-color: rgba(255, 107, 0, 0.65) rgba(255, 255, 255, 0.04);
+  scrollbar-color: color-mix(in srgb, var(--copper) 65%, transparent) rgba(0, 0, 0, 0.05);
   scrollbar-width: thin;
 }
 
@@ -63,11 +174,11 @@ select {
 }
 
 .xcreos-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
   border-radius: 999px;
 }
 
 .xcreos-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, rgba(255, 122, 13, 0.82), rgba(255, 177, 105, 0.8));
+  background: linear-gradient(90deg, var(--copper), var(--copper-700));
   border-radius: 999px;
 }
