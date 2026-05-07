@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-xcreos-background: #000000;
+  --color-xcreos-surface: #0d0d0d;
+  --color-xcreos-primary: #ff6b00;
+  --color-xcreos-muted: #888888;
+  --color-xcreos-border: #202020;
+}
+
+:root {
+  color: #ffffff;
+  background: #000000;
+  font-family: 'Inter', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 107, 0, 0.12), transparent 28%),
+    linear-gradient(180deg, #050505 0%, #000000 100%);
+  color: #ffffff;
+}
+
+body::selection {
+  background: rgba(255, 107, 0, 0.35);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
