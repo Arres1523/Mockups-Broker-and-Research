@@ -179,10 +179,13 @@ function App() {
   const banner = buildBanner(reason, error)
   const marketCount = new Set(properties.map((property) => property.market).filter(Boolean)).size
   const brokerCount = new Set(properties.map((property) => property.broker_name).filter(Boolean)).size
+  const tableProperties = [...visibleProperties].sort(
+    (left, right) => left.investment_score - right.investment_score,
+  )
   const displayedProperties =
     portfolioView === 'all'
-      ? visibleProperties
-      : visibleProperties.slice(0, portfolioView)
+      ? tableProperties
+      : tableProperties.slice(0, portfolioView)
 
   function handleFilterChange(field, value) {
     setFilters((current) => ({

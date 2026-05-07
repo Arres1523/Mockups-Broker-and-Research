@@ -37,7 +37,7 @@ function ChartShell({ title, subtitle, children, heightClassName = 'h-80' }) {
 }
 
 function chartTheme() {
-    return {
+  return {
     stroke: '#242424',
     axis: '#8b847d',
     tooltipStyle: {
@@ -117,7 +117,7 @@ function MarketCoverageMap({ properties }) {
     .filter(Boolean)
 
   return (
-    <div className="grid h-full min-h-0 gap-3 xl:grid-cols-[minmax(0,1.3fr)_220px]">
+    <div className="grid h-full min-h-0 gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
       <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.16),_transparent_36%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
         <div
           className="absolute inset-0 opacity-30"
@@ -218,7 +218,7 @@ function MarketCoverageMap({ properties }) {
         </svg>
       </div>
 
-      <div className="grid min-h-0 auto-rows-min gap-3">
+      <div className="grid min-h-0 grid-rows-[auto_auto_minmax(0,1fr)] gap-3">
         <div className="rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
           <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Selected market</p>
           <h4 className="mt-2 text-xl font-semibold text-white">{highlightedMarket.market}</h4>
@@ -245,13 +245,13 @@ function MarketCoverageMap({ properties }) {
           </div>
         </div>
 
-        <div className="min-h-0 rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
+        <div className="flex min-h-0 flex-col rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Top clusters</p>
             <p className="truncate text-xs text-xcreos-muted">{topMarket.market}</p>
           </div>
-          <div className="mt-4 grid gap-2">
-            {points.slice(0, 3).map((point, index) => {
+          <div className="xcreos-scrollbar mt-4 grid min-h-0 gap-2 overflow-y-auto pr-1">
+            {points.map((point, index) => {
               const pointShare = (point.count / maxCount) * 100
 
               return (
@@ -348,9 +348,11 @@ export function Charts({ properties }) {
         />
       </ChartShell>
 
-      <ChartShell title="Properties by Market" subtitle="Geographic split" heightClassName="h-[28rem]">
-        <MarketCoverageMap properties={properties} />
-      </ChartShell>
+      <div className="2xl:col-span-2">
+        <ChartShell title="Properties by Market" subtitle="Geographic split" heightClassName="h-[34rem]">
+          <MarketCoverageMap properties={properties} />
+        </ChartShell>
+      </div>
 
       <div className="2xl:col-span-2">
         <ChartShell title="Broker Contribution by Property Count" subtitle="Channel mix">
