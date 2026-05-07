@@ -180,7 +180,7 @@ function App() {
   const marketCount = new Set(properties.map((property) => property.market).filter(Boolean)).size
   const brokerCount = new Set(properties.map((property) => property.broker_name).filter(Boolean)).size
   const tableProperties = [...visibleProperties].sort(
-    (left, right) => left.investment_score - right.investment_score,
+    (left, right) => right.investment_score - left.investment_score,
   )
   const displayedProperties =
     portfolioView === 'all'
