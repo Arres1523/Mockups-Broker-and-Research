@@ -84,7 +84,7 @@ function buildBanner(reason, error) {
 
   if (reason === 'missing-env') {
     return {
-      tone: 'border-white/10 bg-white/[0.04] text-white',
+      tone: 'border-[#221a13] bg-[rgba(25,16,9,0.34)] text-white',
       title: 'Demo portfolio active',
       message: 'Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to switch this view to live data.',
     }
@@ -99,7 +99,7 @@ function LoadingScreen() {
       <div className="h-56 animate-pulse rounded-[2rem] bg-white/[0.04]" />
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
         {Array.from({ length: 7 }).map((_, index) => (
-          <div key={index} className="h-36 animate-pulse rounded-[1.75rem] bg-white/[0.04]" />
+          <div key={index} className="h-36 animate-pulse rounded-[1.75rem] bg-white/[0.035]" />
         ))}
       </div>
     </div>
@@ -108,7 +108,7 @@ function LoadingScreen() {
 
 function EmptyFilterState() {
   return (
-    <div className="rounded-[1.75rem] border border-dashed border-xcreos-border bg-xcreos-surface px-6 py-12 text-center">
+    <div className="rounded-[1.75rem] border border-dashed border-[#1a1a1a] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-6 py-12 text-center">
       <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">No results</p>
       <h3 className="mt-3 text-2xl font-semibold text-white">No properties match the current filters.</h3>
       <p className="mt-3 text-sm text-xcreos-muted">
@@ -119,7 +119,7 @@ function EmptyFilterState() {
 }
 
 function ChartsLoadingState() {
-  return <div className="h-80 animate-pulse rounded-[1.75rem] bg-white/[0.04]" />
+  return <div className="h-80 animate-pulse rounded-[1.75rem] bg-white/[0.035]" />
 }
 
 function App() {
@@ -239,7 +239,7 @@ function App() {
               </Suspense>
               <PropertyTable properties={visibleProperties} />
               <section className="grid gap-4">
-                <div className="flex flex-col gap-3 rounded-[1.75rem] border border-xcreos-border bg-xcreos-surface px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-5 py-4 shadow-[0_8px_28px_rgba(0,0,0,0.24)] sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">
                       Property cards
@@ -248,7 +248,7 @@ function App() {
                       Ranked opportunity snapshots
                     </h2>
                   </div>
-                  <div className="inline-flex rounded-full border border-xcreos-border bg-black/30 p-1">
+                  <div className="inline-flex rounded-full border border-[#2a2118] bg-[rgba(12,12,12,0.94)] p-1">
                     {propertyCardViews.map((option) => {
                       const isActive = propertyCardView === option.value
 
@@ -259,7 +259,7 @@ function App() {
                           onClick={() => setPropertyCardView(option.value)}
                           className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                             isActive
-                              ? 'bg-xcreos-primary text-black'
+                              ? 'bg-xcreos-primary text-[#170d05]'
                               : 'text-xcreos-muted hover:text-white'
                           }`}
                         >

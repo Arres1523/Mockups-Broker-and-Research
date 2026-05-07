@@ -4,7 +4,7 @@ export function SummaryCards({ items }) {
       {items.map((item) => (
         <article
           key={item.label}
-          className="rounded-[1.75rem] border border-xcreos-border bg-xcreos-surface px-5 py-5"
+          className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(12,12,12,0.98),rgba(7,7,7,0.98))] px-5 py-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]"
         >
           <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">
             {item.label}

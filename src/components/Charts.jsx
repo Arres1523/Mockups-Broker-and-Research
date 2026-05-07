@@ -19,7 +19,7 @@ const marketColors = ['#FF6B00', '#FF8A3D', '#FFB169', '#FFD1A6', '#C76A24']
 
 function ChartShell({ title, subtitle, children }) {
   return (
-    <article className="rounded-[1.75rem] border border-xcreos-border bg-xcreos-surface p-5">
+    <article className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
       <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">{subtitle}</p>
       <h3 className="mt-2 text-lg font-semibold text-white">{title}</h3>
       <div className="mt-5 h-80">{children}</div>
@@ -28,12 +28,12 @@ function ChartShell({ title, subtitle, children }) {
 }
 
 function chartTheme() {
-  return {
-    stroke: '#3A3A3A',
-    axis: '#888888',
+    return {
+    stroke: '#242424',
+    axis: '#8b847d',
     tooltipStyle: {
       backgroundColor: '#0D0D0D',
-      border: '1px solid #2A2A2A',
+      border: '1px solid #22180F',
       borderRadius: '16px',
       color: '#FFFFFF',
     },
@@ -42,7 +42,7 @@ function chartTheme() {
 
 function EmptyChartState({ message }) {
   return (
-    <div className="flex h-full items-center justify-center rounded-[1.5rem] border border-dashed border-white/10 bg-black/20 px-6 text-center">
+    <div className="flex h-full items-center justify-center rounded-[1.5rem] border border-dashed border-white/8 bg-black/20 px-6 text-center">
       <p className="max-w-sm text-sm text-xcreos-muted">{message}</p>
     </div>
   )
@@ -72,7 +72,7 @@ function ComparisonBarChart({ data, formatter, emptyMessage }) {
           cursor={{ fill: 'rgba(255,255,255,0.04)' }}
           formatter={(value) => formatter(value)}
         />
-        <Bar dataKey="value" radius={[0, 12, 12, 0]} fill="#FF6B00" />
+        <Bar dataKey="value" radius={[0, 12, 12, 0]} fill="#FF7A0D" />
       </BarChart>
     </ResponsiveContainer>
   )
@@ -89,19 +89,20 @@ function MarketShape() {
     >
       <defs>
         <linearGradient id="market-surface" x1="120" y1="120" x2="860" y2="520" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#141414" />
-          <stop offset="1" stopColor="#0A0A0A" />
+          <stop stopColor="#1A140F" />
+          <stop offset="0.4" stopColor="#121212" />
+          <stop offset="1" stopColor="#090909" />
         </linearGradient>
       </defs>
       <path
-        d="M123 185L148 160L214 162L272 125L349 121L385 141L444 136L505 157L578 155L625 171L676 171L735 198L791 214L861 210L898 235L887 281L840 302L826 338L831 394L806 430L773 440L751 471L692 476L645 462L607 474L566 454L508 468L458 447L415 452L362 436L300 437L253 410L212 402L170 370L155 333L126 313L111 274L118 224L123 185Z"
+        d="M83 403L91 369L80 336L96 292L125 294L167 268L206 270L237 243L286 246L310 214L377 208L436 180L497 182L543 156L616 146L706 149L781 173L853 167L883 184L902 228L896 260L854 273L839 306L836 344L796 364L780 411L760 438L703 439L683 473L628 478L598 469L558 479L513 465L478 472L435 458L389 471L330 453L295 455L251 440L228 449L199 445L171 420L141 420L113 414L83 403Z"
         fill="url(#market-surface)"
         stroke="#2A2A2A"
         strokeWidth="6"
         strokeLinejoin="round"
       />
       <path
-        d="M155 495L194 468L238 480L243 520L190 542L155 495Z"
+        d="M139 454L171 438L201 450L200 482L168 494L144 486L139 454Z"
         fill="url(#market-surface)"
         stroke="#2A2A2A"
         strokeWidth="6"
@@ -127,7 +128,7 @@ function MarketCoverageMap({ properties }) {
 
   return (
     <div className="grid h-full gap-4 lg:grid-cols-[minmax(0,1.65fr)_minmax(250px,0.95fr)]">
-      <div className="relative overflow-hidden rounded-[1.6rem] border border-white/8 bg-[radial-gradient(circle_at_top,_rgba(255,107,0,0.16),_transparent_42%),linear-gradient(180deg,_rgba(18,18,18,0.95),_rgba(6,6,6,0.98))]">
+      <div className="relative overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.18),_transparent_38%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
         <div
           className="absolute inset-0 opacity-35"
           style={{
@@ -136,7 +137,7 @@ function MarketCoverageMap({ properties }) {
             backgroundSize: '44px 44px',
           }}
         />
-        <div className="absolute left-5 top-5 z-20 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">
+        <div className="absolute left-5 top-5 z-20 rounded-full border border-[#322115] bg-[rgba(33,18,8,0.52)] px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#b4977d]">
           Markets covered
         </div>
         <MarketShape />
@@ -165,11 +166,11 @@ function MarketCoverageMap({ properties }) {
                     width: `${size * 1.9}px`,
                     height: `${size * 1.9}px`,
                     transform: 'translate(-50%, -50%)',
-                    backgroundColor: 'rgba(255, 107, 0, 0.28)',
+                    backgroundColor: 'rgba(255, 122, 13, 0.3)',
                   }}
                 />
                 <span
-                  className={`relative flex items-center justify-center rounded-full border border-white/18 font-semibold text-black shadow-[0_0_18px_rgba(255,107,0,0.28)] transition ${
+                  className={`relative flex items-center justify-center rounded-full border border-[#f5d3ae]/30 font-semibold text-[#1d1208] shadow-[0_0_18px_rgba(255,122,13,0.28)] transition ${
                     isActive ? 'scale-110' : 'group-hover:scale-105'
                   }`}
                   style={{
@@ -183,7 +184,7 @@ function MarketCoverageMap({ properties }) {
                 {index < 4 ? (
                   <span
                     className={`pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.18em] transition ${
-                      isActive ? 'bg-white text-black' : 'bg-black/60 text-white/70'
+                      isActive ? 'bg-[#f6dcc0] text-[#201207]' : 'bg-black/60 text-white/70'
                     }`}
                   >
                     {point.state}
@@ -196,15 +197,15 @@ function MarketCoverageMap({ properties }) {
       </div>
 
       <div className="grid gap-3">
-        <div className="rounded-[1.45rem] border border-white/8 bg-black/25 p-4">
+        <div className="rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
           <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Selected market</p>
           <h4 className="mt-2 text-xl font-semibold text-white">{highlightedMarket.market}</h4>
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="rounded-2xl border border-white/6 bg-white/[0.03] p-3">
+            <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
               <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Properties</p>
               <p className="mt-2 text-2xl font-semibold text-white">{highlightedMarket.count}</p>
             </div>
-            <div className="rounded-2xl border border-white/6 bg-white/[0.03] p-3">
+            <div className="rounded-2xl border border-[#2a1a10] bg-[rgba(33,18,8,0.28)] p-3">
               <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Share</p>
               <p className="mt-2 text-2xl font-semibold text-xcreos-primary">{share}%</p>
             </div>
@@ -212,17 +213,17 @@ function MarketCoverageMap({ properties }) {
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-[1.35rem] border border-white/8 bg-black/25 p-4">
+          <div className="rounded-[1.35rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
             <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Markets covered</p>
             <p className="mt-2 text-2xl font-semibold text-white">{points.length}</p>
           </div>
-          <div className="rounded-[1.35rem] border border-white/8 bg-black/25 p-4">
+          <div className="rounded-[1.35rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
             <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Mapped assets</p>
             <p className="mt-2 text-2xl font-semibold text-white">{totalMapped}</p>
           </div>
         </div>
 
-        <div className="rounded-[1.45rem] border border-white/8 bg-black/25 p-4">
+        <div className="rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Top clusters</p>
             <p className="text-xs text-xcreos-muted">{topMarket.market}</p>
@@ -237,7 +238,7 @@ function MarketCoverageMap({ properties }) {
                   type="button"
                   className={`grid gap-2 rounded-2xl border px-3 py-3 text-left transition ${
                     highlightedMarket.market === point.market
-                      ? 'border-xcreos-primary/35 bg-xcreos-primary/10'
+                      ? 'border-xcreos-primary/35 bg-[rgba(255,122,13,0.08)]'
                       : 'border-white/6 bg-white/[0.02] hover:border-white/12'
                   }`}
                   onMouseEnter={() => setActiveMarketId(point.market)}
@@ -338,7 +339,7 @@ export function Charts({ properties }) {
                   contentStyle={theme.tooltipStyle}
                   formatter={(value) => `${value} properties`}
                 />
-                <Bar dataKey="count" fill="#FF6B00" radius={[12, 12, 0, 0]} />
+                <Bar dataKey="count" fill="#FF7A0D" radius={[12, 12, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (

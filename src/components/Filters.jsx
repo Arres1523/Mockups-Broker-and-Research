@@ -15,12 +15,12 @@ function Field({ label, children }) {
 }
 
 function inputClassName() {
-  return 'h-11 rounded-2xl border border-xcreos-border bg-black/40 px-4 text-sm text-white outline-none transition focus:border-xcreos-primary'
+  return 'h-11 rounded-2xl border border-[#181818] bg-[linear-gradient(180deg,rgba(7,7,7,0.96),rgba(3,3,3,0.98))] px-4 text-sm text-white outline-none transition placeholder:text-[#655f59] focus:border-xcreos-primary focus:bg-black'
 }
 
 export function Filters({ filters, markets, brokers, onChange, onReset }) {
   return (
-    <section className="rounded-[1.75rem] border border-xcreos-border bg-xcreos-surface p-5">
+    <section className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">
@@ -31,7 +31,7 @@ export function Filters({ filters, markets, brokers, onChange, onReset }) {
         <button
           type="button"
           onClick={onReset}
-          className="rounded-full border border-xcreos-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:border-xcreos-primary hover:text-xcreos-primary"
+          className="rounded-full border border-[#27211b] bg-black/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:border-xcreos-primary hover:text-xcreos-primary"
         >
           Reset filters
         </button>

@@ -3,11 +3,12 @@
 
 @theme {
   --font-sans: "Inter", sans-serif;
-  --color-xcreos-background: #000000;
-  --color-xcreos-surface: #0d0d0d;
-  --color-xcreos-primary: #ff6b00;
-  --color-xcreos-muted: #888888;
-  --color-xcreos-border: #202020;
+  --color-xcreos-background: #030303;
+  --color-xcreos-surface: #0b0b0b;
+  --color-xcreos-primary: #ff7a0d;
+  --color-xcreos-primary-soft: #ffb169;
+  --color-xcreos-muted: #8b847d;
+  --color-xcreos-border: #1a1a1a;
 }
 
 :root {
@@ -31,8 +32,9 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(255, 107, 0, 0.12), transparent 28%),
-    linear-gradient(180deg, #050505 0%, #000000 100%);
+    radial-gradient(circle at top left, rgba(255, 122, 13, 0.14), transparent 24%),
+    radial-gradient(circle at 20% 0%, rgba(120, 62, 18, 0.12), transparent 32%),
+    linear-gradient(180deg, #050505 0%, #020202 100%);
   color: #ffffff;
 }
 
@@ -65,6 +67,6 @@ select {
 }
 
 .xcreos-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, rgba(255, 107, 0, 0.8), rgba(255, 145, 74, 0.8));
+  background: linear-gradient(90deg, rgba(255, 122, 13, 0.82), rgba(255, 177, 105, 0.8));
   border-radius: 999px;
 }

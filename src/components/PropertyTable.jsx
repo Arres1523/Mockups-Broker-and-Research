@@ -32,7 +32,7 @@ function scoreClassName(score) {
 
 export function PropertyTable({ properties }) {
   return (
-    <section className="rounded-[1.75rem] border border-xcreos-border bg-xcreos-surface p-5 sm:p-6">
+    <section className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.22)] sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Property table</p>
@@ -40,7 +40,7 @@ export function PropertyTable({ properties }) {
             Comparable underwriting view
           </h3>
         </div>
-        <div className="inline-flex items-center gap-3 self-start rounded-full border border-white/8 bg-black/25 px-3 py-2 sm:self-auto">
+        <div className="inline-flex items-center gap-3 self-start rounded-full border border-[#2a2118] bg-[rgba(24,14,7,0.34)] px-3 py-2 sm:self-auto">
           <span className="h-2 w-2 rounded-full bg-xcreos-primary" />
           <p className="text-sm text-xcreos-muted">{properties.length} rows</p>
         </div>
@@ -82,11 +82,11 @@ export function PropertyTable({ properties }) {
             {properties.map((property, index) => (
               <tr
                 key={property.id}
-                className="rounded-[1.45rem] bg-[linear-gradient(180deg,rgba(8,8,8,0.94),rgba(5,5,5,0.98))] text-sm text-white shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
+                className="rounded-[1.45rem] bg-[linear-gradient(180deg,rgba(9,9,9,0.96),rgba(5,5,5,0.98))] text-sm text-white shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
               >
-                <td className="rounded-l-[1.45rem] border border-r-0 border-white/[0.03] px-4 py-4">
+                <td className="rounded-l-[1.45rem] border border-r-0 border-[#141414] px-4 py-4">
                   <div className="flex items-start gap-3">
-                    <span className="mt-0.5 inline-flex min-w-9 justify-center rounded-full border border-white/8 bg-white/[0.04] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-xcreos-muted">
+                    <span className="mt-0.5 inline-flex min-w-9 justify-center rounded-full border border-[#26211d] bg-white/[0.03] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-xcreos-muted">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <div className="min-w-0">
@@ -99,41 +99,41 @@ export function PropertyTable({ properties }) {
                     </div>
                   </div>
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 text-xcreos-muted">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-xcreos-muted">
                   {property.market || '—'}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 text-xcreos-muted">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-xcreos-muted">
                   {property.broker_name || '—'}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
                   {formatNumber(property.units)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4">
                   {property.year_built ?? '—'}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
                   {formatPercent(property.physical_occupancy_pct)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
                   {formatCurrency(property.noi_actual)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
                   {formatPercent(property.expense_ratio_actual)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
                   {formatDscr(property.dscr_current)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
                   {formatCompactCurrency(property.in_place_annual_upside)}
                 </td>
                 <td
-                  className={`border border-l-0 border-r-0 border-white/[0.03] px-4 py-4 text-lg font-semibold ${scoreClassName(property.investment_score)}`}
+                  className={`border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-lg font-semibold ${scoreClassName(property.investment_score)}`}
                 >
                   {property.investment_score}
                 </td>
-                <td className="rounded-r-[1.45rem] border border-l-0 border-white/[0.03] px-4 py-4">
+                <td className="rounded-r-[1.45rem] border border-l-0 border-[#141414] px-4 py-4">
                   <span
-                    className={`inline-flex rounded-full border px-3 py-2 text-xs font-semibold ${badgeClassName(property.opportunity_label)}`}
+                    className={`inline-flex rounded-full border px-3 py-2 text-xs font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${badgeClassName(property.opportunity_label)}`}
                   >
                     {property.opportunity_label}
                   </span>

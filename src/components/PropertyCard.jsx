@@ -25,7 +25,7 @@ export function PropertyCard({ property }) {
   return (
     <article
       data-testid="property-card"
-      className="rounded-[1.75rem] border border-xcreos-border bg-xcreos-surface p-5"
+      className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(12,12,12,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.22)]"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
@@ -38,7 +38,7 @@ export function PropertyCard({ property }) {
           <p className="mt-2 text-sm text-xcreos-muted">{property.broker_name}</p>
         </div>
 
-        <div className={`rounded-full border px-3 py-2 text-xs font-semibold ${badgeClassName(property.opportunity_label)}`}>
+        <div className={`rounded-full border px-3 py-2 text-xs font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${badgeClassName(property.opportunity_label)}`}>
           {property.opportunity_label}
         </div>
       </div>
@@ -48,9 +48,9 @@ export function PropertyCard({ property }) {
           <span className="font-medium text-white">Investment Score</span>
           <span className="font-semibold text-xcreos-primary">{property.investment_score}/100</span>
         </div>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/8">
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/7">
           <div
-            className="h-full rounded-full bg-xcreos-primary"
+            className="h-full rounded-full bg-[linear-gradient(90deg,#ff7a0d,#ff861d)]"
             style={{ width: `${property.investment_score}%` }}
           />
         </div>
