@@ -102,10 +102,10 @@ function buildBanner(reason, error) {
 function LoadingScreen() {
   return (
     <div className="grid gap-4">
-      <div className="h-56 animate-pulse rounded-[2rem] bg-white/[0.04]" />
+      <div className="h-56 animate-pulse rounded-md bg-[#111111]" />
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
         {Array.from({ length: 7 }).map((_, index) => (
-          <div key={index} className="h-36 animate-pulse rounded-[1.75rem] bg-white/[0.035]" />
+          <div key={index} className="h-36 animate-pulse rounded-md bg-[#111111]" />
         ))}
       </div>
     </div>
@@ -114,7 +114,7 @@ function LoadingScreen() {
 
 function EmptyFilterState() {
   return (
-    <div className="rounded-[1.75rem] border border-dashed border-[#1a1a1a] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-6 py-12 text-center">
+    <div className="rounded-md border border-dashed border-xcreos-border bg-xcreos-surface px-6 py-12 text-center">
       <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">No results</p>
       <h3 className="mt-3 text-2xl font-semibold text-white">No properties match the current filters.</h3>
       <p className="mt-3 text-sm text-xcreos-muted">
@@ -125,7 +125,7 @@ function EmptyFilterState() {
 }
 
 function ChartsLoadingState() {
-  return <div className="h-80 animate-pulse rounded-[1.75rem] bg-white/[0.035]" />
+  return <div className="h-80 animate-pulse rounded-md bg-[#111111]" />
 }
 
 export function BrokerDashboard() {
@@ -223,7 +223,7 @@ export function BrokerDashboard() {
           />
 
           {banner ? (
-            <div className={`rounded-[1.5rem] border px-5 py-4 ${banner.tone}`}>
+            <div className={`rounded-md border px-5 py-4 ${banner.tone}`}>
               <p className="text-sm font-semibold">{banner.title}</p>
               <p className="mt-1 text-sm">{banner.message}</p>
             </div>
@@ -254,7 +254,7 @@ export function BrokerDashboard() {
                 onViewChange={setPortfolioView}
               />
               <section className="grid gap-4">
-                <div className="flex flex-col gap-3 rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-5 py-4 shadow-[0_8px_28px_rgba(0,0,0,0.24)] sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 rounded-md border border-xcreos-border bg-xcreos-surface px-5 py-4 shadow-none sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">
                       Property cards
@@ -326,18 +326,18 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-xcreos-background text-white">
       <main className="mx-auto flex min-h-screen max-w-[1500px] items-center px-4 py-10 sm:px-6 lg:px-8">
-        <section className="w-full overflow-hidden rounded-[2.25rem] border border-[#171717] bg-[radial-gradient(circle_at_top_left,rgba(255,122,13,0.23),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,177,105,0.09),transparent_26%),linear-gradient(135deg,rgba(15,15,15,0.98),rgba(3,3,3,0.99))] p-6 shadow-[0_22px_90px_rgba(0,0,0,0.42)] sm:p-9">
+        <section className="w-full overflow-hidden rounded-md border border-xcreos-border bg-xcreos-surface p-6 shadow-none sm:p-8">
           <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.3em] text-[#c49b78]">Valoris capital partners</p>
-              <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.07em] text-white sm:text-6xl">
+              <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Valoris capital partners</p>
+              <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-white sm:text-6xl">
                 Choose your intelligence workspace
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-6 text-xcreos-muted">
                 One Xcreos-style app with broker underwriting and market research views connected through version-controlled Vercel deployments.
               </p>
             </div>
-            <div className="rounded-full border border-[#2a2118] bg-[rgba(24,14,7,0.34)] px-4 py-2 text-sm text-xcreos-muted">
+            <div className="rounded-md border border-xcreos-border bg-[#090909] px-4 py-2 text-sm text-xcreos-muted">
               Select Broker or Research
             </div>
           </div>
@@ -346,10 +346,10 @@ function LandingPage() {
               <a
                 key={card.title}
                 href={card.href}
-                className="group grid min-h-[320px] rounded-[2rem] border border-[#1c1c1c] bg-[linear-gradient(180deg,rgba(12,12,12,0.98),rgba(5,5,5,0.98))] p-6 shadow-[0_16px_50px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:border-xcreos-primary/40 hover:shadow-[0_24px_80px_rgba(255,122,13,0.13)]"
+                className="group grid min-h-[320px] rounded-md border border-xcreos-border bg-[#0b0b0b] p-6 shadow-none transition hover:-translate-y-0.5 hover:border-xcreos-primary"
               >
                 <div>
-                  <p className="inline-flex rounded-full border border-[#322115] bg-[rgba(33,18,8,0.52)] px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#b4977d]">
+                  <p className="inline-flex rounded-md border border-xcreos-border bg-[#111111] px-3 py-1 text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">
                     {card.eyebrow}
                   </p>
                   <h2 className="mt-7 text-4xl font-semibold tracking-[-0.06em] text-white">{card.title}</h2>
@@ -357,7 +357,7 @@ function LandingPage() {
                 </div>
                 <div className="mt-10 flex items-end justify-between gap-6">
                   <p className="max-w-sm text-xs uppercase tracking-[0.2em] text-xcreos-muted">{card.meta}</p>
-                  <span className="rounded-full bg-xcreos-primary px-5 py-3 text-sm font-semibold text-[#170d05] transition group-hover:bg-xcreos-primary-soft">
+                  <span className="rounded-md bg-xcreos-primary px-5 py-3 text-sm font-semibold text-black transition group-hover:bg-xcreos-primary-soft">
                     Open
                   </span>
                 </div>
@@ -372,14 +372,14 @@ function LandingPage() {
 
 function RouteNavigation() {
   return (
-    <nav className="fixed right-4 top-4 z-50 flex rounded-full border border-[#2a2118] bg-black/75 p-1 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur">
-      <a className="rounded-full px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:text-white" href="#">
+    <nav className="fixed right-4 top-4 z-50 flex rounded-md border border-xcreos-border bg-[#0b0b0b] p-1 shadow-none">
+      <a className="rounded px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:bg-[#151515] hover:text-white" href="#">
         Index
       </a>
-      <a className="rounded-full px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:text-white" href="#broker">
+      <a className="rounded px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:bg-[#151515] hover:text-white" href="#broker">
         Broker
       </a>
-      <a className="rounded-full px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:text-white" href="#research">
+      <a className="rounded px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:bg-[#151515] hover:text-white" href="#research">
         Research
       </a>
     </nav>

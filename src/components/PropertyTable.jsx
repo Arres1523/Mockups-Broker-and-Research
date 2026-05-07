@@ -32,16 +32,16 @@ function scoreClassName(score) {
 
 export function PropertyTable({ properties, totalProperties, viewOptions, currentView, onViewChange }) {
   return (
-    <section className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.22)] sm:p-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section className="rounded-md border border-xcreos-border bg-xcreos-surface p-5 shadow-none sm:p-6">
+      <div className="flex flex-col gap-4 border-b border-xcreos-border pb-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Property table</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-white">
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Property table</p>
+          <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-white">
             Comparable underwriting view
           </h3>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex rounded-full border border-[#2a2118] bg-[rgba(12,12,12,0.94)] p-1">
+          <div className="inline-flex rounded-md border border-xcreos-border bg-[#090909] p-1">
             {viewOptions.map((option) => {
               const isActive = currentView === option.value
 
@@ -52,7 +52,7 @@ export function PropertyTable({ properties, totalProperties, viewOptions, curren
                   onClick={() => onViewChange(option.value)}
                   className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                     isActive
-                      ? 'bg-xcreos-primary text-[#170d05]'
+                      ? 'bg-xcreos-primary text-black'
                       : 'text-xcreos-muted hover:text-white'
                   }`}
                 >
@@ -61,7 +61,7 @@ export function PropertyTable({ properties, totalProperties, viewOptions, curren
               )
             })}
           </div>
-          <div className="inline-flex items-center gap-3 rounded-full border border-[#2a2118] bg-[rgba(24,14,7,0.34)] px-3 py-2">
+          <div className="inline-flex items-center gap-3 rounded-md border border-xcreos-border bg-[#090909] px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-xcreos-primary" />
             <p className="text-sm text-xcreos-muted">
               {properties.length} of {totalProperties} rows
@@ -106,11 +106,11 @@ export function PropertyTable({ properties, totalProperties, viewOptions, curren
             {properties.map((property, index) => (
               <tr
                 key={property.id}
-                className="rounded-[1.45rem] bg-[linear-gradient(180deg,rgba(9,9,9,0.96),rgba(5,5,5,0.98))] text-sm text-white shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
+                className="rounded-md bg-[#0b0b0b] text-sm text-white transition hover:bg-[#101010]"
               >
-                <td className="rounded-l-[1.45rem] border border-r-0 border-[#141414] px-4 py-4">
+                <td className="rounded-l-md border border-r-0 border-xcreos-border px-4 py-4">
                   <div className="flex items-start gap-3">
-                    <span className="mt-0.5 inline-flex min-w-9 justify-center rounded-full border border-[#26211d] bg-white/[0.03] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-xcreos-muted">
+                    <span className="mt-0.5 inline-flex min-w-9 justify-center rounded-md border border-xcreos-border bg-[#111111] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-xcreos-muted">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <div className="min-w-0">
@@ -123,41 +123,41 @@ export function PropertyTable({ properties, totalProperties, viewOptions, curren
                     </div>
                   </div>
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-xcreos-muted">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 text-xcreos-muted">
                   {property.market || '—'}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-xcreos-muted">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 text-xcreos-muted">
                   {property.broker_name || '—'}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">
                   {formatNumber(property.units)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4">
                   {property.year_built ?? '—'}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">
                   {formatPercent(property.physical_occupancy_pct)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">
                   {formatCurrency(property.noi_actual)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">
                   {formatPercent(property.expense_ratio_actual)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">
                   {formatDscr(property.dscr_current)}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">
                   {formatCompactCurrency(property.in_place_annual_upside)}
                 </td>
                 <td
-                  className={`border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-lg font-semibold ${scoreClassName(property.investment_score)}`}
+                  className={`border border-l-0 border-r-0 border-xcreos-border px-4 py-4 text-lg font-semibold ${scoreClassName(property.investment_score)}`}
                 >
                   {property.investment_score}
                 </td>
-                <td className="rounded-r-[1.45rem] border border-l-0 border-[#141414] px-4 py-4">
+                <td className="rounded-r-md border border-l-0 border-xcreos-border px-4 py-4">
                   <span
-                    className={`inline-flex rounded-full border px-3 py-2 text-xs font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${badgeClassName(property.opportunity_label)}`}
+                    className={`inline-flex rounded-md border px-3 py-2 text-xs font-semibold ${badgeClassName(property.opportunity_label)}`}
                   >
                     {property.opportunity_label}
                   </span>

@@ -104,12 +104,12 @@ const defaultFilters = {
 
 function xcreosTheme() {
   return {
-    stroke: '#242424',
-    axis: '#8b847d',
+    stroke: '#2a2a2a',
+    axis: '#8a8f98',
     tooltipStyle: {
-      backgroundColor: '#0D0D0D',
-      border: '1px solid #22180F',
-      borderRadius: '16px',
+      backgroundColor: '#111111',
+      border: '1px solid #2a2a2a',
+      borderRadius: '8px',
       color: '#FFFFFF',
     },
   }
@@ -145,8 +145,8 @@ function scoreBadge(score) {
 
 function ChartShell({ title, subtitle, children, heightClassName = 'h-80' }) {
   return (
-    <article className="overflow-hidden rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
-      <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">{subtitle}</p>
+    <article className="overflow-hidden rounded-md border border-xcreos-border bg-xcreos-surface p-5 shadow-none">
+      <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">{subtitle}</p>
       <h3 className="mt-2 text-lg font-semibold text-white">{title}</h3>
       <div className={`mt-5 ${heightClassName}`}>{children}</div>
     </article>
@@ -155,11 +155,11 @@ function ChartShell({ title, subtitle, children, heightClassName = 'h-80' }) {
 
 function ResearchHero({ summary }) {
   return (
-    <section className="overflow-hidden rounded-[2rem] border border-[#171717] bg-[radial-gradient(circle_at_top_left,rgba(255,122,13,0.22),transparent_34%),linear-gradient(135deg,rgba(16,16,16,0.98),rgba(5,5,5,0.98))] p-6 shadow-[0_18px_70px_rgba(0,0,0,0.32)] sm:p-8">
+    <section className="overflow-hidden rounded-md border border-xcreos-border bg-xcreos-surface p-6 shadow-none sm:p-7">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.28em] text-[#c49b78]">Market research</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-[-0.06em] text-white sm:text-5xl">
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Market research</p>
+          <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl">
             Market Research Intelligence
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-xcreos-muted">
@@ -167,16 +167,16 @@ function ResearchHero({ summary }) {
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl border border-[#24180f] bg-black/35 px-5 py-4">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-xcreos-muted">ZIPs</p>
+          <div className="rounded-md border border-xcreos-border bg-[#0b0b0b] px-5 py-4">
+            <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">ZIPs</p>
             <p className="mt-2 text-2xl font-semibold text-white">{formatNumber(summary.zipCount)}</p>
           </div>
-          <div className="rounded-2xl border border-[#24180f] bg-black/35 px-5 py-4">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-xcreos-muted">States</p>
+          <div className="rounded-md border border-xcreos-border bg-[#0b0b0b] px-5 py-4">
+            <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">States</p>
             <p className="mt-2 text-2xl font-semibold text-white">{formatNumber(summary.stateCount)}</p>
           </div>
-          <div className="rounded-2xl border border-[#24180f] bg-black/35 px-5 py-4">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-xcreos-muted">Metros</p>
+          <div className="rounded-md border border-xcreos-border bg-[#0b0b0b] px-5 py-4">
+            <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">Metros</p>
             <p className="mt-2 text-2xl font-semibold text-white">{formatNumber(summary.metroCount)}</p>
           </div>
         </div>
@@ -201,9 +201,9 @@ function SummaryCards({ summary }) {
       {cards.map((card) => (
         <article
           key={card.label}
-          className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(12,12,12,0.98),rgba(7,7,7,0.98))] px-5 py-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]"
+          className="rounded-md border border-xcreos-border bg-xcreos-surface px-5 py-5 shadow-none"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">{card.label}</p>
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">{card.label}</p>
           <p className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">{card.value}</p>
         </article>
       ))}
@@ -213,20 +213,20 @@ function SummaryCards({ summary }) {
 
 function ResearchFilters({ filters, states, metros, onChange, onReset }) {
   const inputClass =
-    'w-full rounded-2xl border border-[#1d1d1d] bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-xcreos-muted focus:border-xcreos-primary/50'
-  const labelClass = 'text-[10px] uppercase tracking-[0.2em] text-xcreos-muted'
+    'w-full rounded-md border border-xcreos-border bg-[#090909] px-3 py-3 text-sm text-white outline-none transition placeholder:text-xcreos-muted focus:border-xcreos-primary'
+  const labelClass = 'text-[10px] uppercase tracking-[0.12em] text-xcreos-muted'
 
   return (
-    <section className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <section className="rounded-md border border-xcreos-border bg-xcreos-surface p-5 shadow-none">
+      <div className="flex flex-col gap-3 border-b border-xcreos-border pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Research filters</p>
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Research filters</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Refine the ZIP universe</h2>
         </div>
         <button
           type="button"
           onClick={onReset}
-          className="rounded-full border border-[#2a2118] px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:border-xcreos-primary/40 hover:text-white"
+          className="rounded-md border border-xcreos-border bg-[#090909] px-4 py-2 text-sm font-semibold text-xcreos-muted transition hover:border-xcreos-primary hover:text-white"
         >
           Reset filters
         </button>
@@ -320,7 +320,7 @@ function ComparisonBarChart({ data, dataKey, formatter, nameKey = 'label' }) {
           cursor={{ fill: 'rgba(255,255,255,0.04)' }}
           formatter={(value) => formatter(value)}
         />
-        <Bar dataKey={dataKey} radius={[0, 12, 12, 0]} fill="#FF7A0D" />
+        <Bar dataKey={dataKey} radius={[0, 4, 4, 0]} fill="#D57B2D" />
       </BarChart>
     </ResponsiveContainer>
   )
@@ -348,7 +348,7 @@ function StateMarketMap({ stateSeries, selectedState, onStateSelect }) {
 
   return (
     <div className="grid h-full min-h-0 gap-4 xl:grid-cols-[minmax(0,1fr)_380px]">
-      <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.18),_transparent_38%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
+      <div className="relative h-full overflow-hidden rounded-md border border-xcreos-border bg-[#0a0a0a]">
         <div
           className="absolute inset-0 opacity-30"
           style={{
@@ -357,7 +357,7 @@ function StateMarketMap({ stateSeries, selectedState, onStateSelect }) {
             backgroundSize: '48px 48px',
           }}
         />
-        <div className="absolute left-5 top-5 z-20 rounded-full border border-[#322115] bg-[rgba(33,18,8,0.56)] px-4 py-1.5 text-[11px] uppercase tracking-[0.24em] text-[#b4977d]">
+        <div className="absolute left-5 top-5 z-20 rounded-md border border-xcreos-border bg-[#111111] px-4 py-1.5 text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">
           Average score by state
         </div>
         <svg
@@ -405,16 +405,16 @@ function StateMarketMap({ stateSeries, selectedState, onStateSelect }) {
       </div>
 
       <div className="grid min-h-0 grid-rows-[auto_auto_minmax(0,1fr)] gap-3">
-        <div className="rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Selected state</p>
+        <div className="rounded-md border border-xcreos-border bg-xcreos-surface p-4">
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Selected state</p>
           <h4 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">{selected?.name || '-'}</h4>
           <div className="mt-4 grid grid-cols-2 gap-2">
-            <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">ZIPs</p>
+            <div className="rounded-md border border-xcreos-border bg-[#090909] p-3">
+              <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">ZIPs</p>
               <p className="mt-2 text-2xl font-semibold text-white">{selected?.count ?? '-'}</p>
             </div>
-            <div className="rounded-2xl border border-[#2a1a10] bg-[rgba(33,18,8,0.28)] p-3">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Avg score</p>
+            <div className="rounded-md border border-xcreos-border bg-[#090909] p-3">
+              <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Avg score</p>
               <p className="mt-2 text-2xl font-semibold text-xcreos-primary">
                 {selected ? selected.averageScore.toFixed(1) : '-'}
               </p>
@@ -423,19 +423,19 @@ function StateMarketMap({ stateSeries, selectedState, onStateSelect }) {
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-[1.35rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">States covered</p>
+          <div className="rounded-md border border-xcreos-border bg-xcreos-surface p-4">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">States covered</p>
             <p className="mt-2 text-2xl font-semibold text-white">{stateSeries.length}</p>
           </div>
-          <div className="rounded-[1.35rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Mapped ZIPs</p>
+          <div className="rounded-md border border-xcreos-border bg-xcreos-surface p-4">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Mapped ZIPs</p>
             <p className="mt-2 text-2xl font-semibold text-white">
               {formatNumber(stateSeries.reduce((sum, state) => sum + state.count, 0))}
             </p>
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-col rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
+        <div className="flex min-h-0 flex-col rounded-md border border-xcreos-border bg-xcreos-surface p-4">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Top states</p>
             <p className="text-xs text-xcreos-muted">score desc</p>
@@ -451,8 +451,8 @@ function StateMarketMap({ stateSeries, selectedState, onStateSelect }) {
                   type="button"
                   className={`grid gap-2 rounded-2xl border px-4 py-3 text-left transition ${
                     isActive
-                      ? 'border-xcreos-primary/35 bg-[rgba(255,122,13,0.08)]'
-                      : 'border-white/6 bg-white/[0.02] hover:border-white/12'
+                      ? 'border-xcreos-primary bg-[#17110c]'
+                      : 'border-xcreos-border bg-[#090909] hover:border-[#333333]'
                   }`}
                   onMouseEnter={() => setHoveredState(state.name)}
                   onFocus={() => setHoveredState(state.name)}
@@ -537,14 +537,14 @@ function ResearchCharts({ rows, stateSeries, metroSeries, onStateSelect, selecte
 
 function ResearchTable({ rows, totalRows, currentView, onViewChange }) {
   return (
-    <section className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.22)] sm:p-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section className="rounded-md border border-xcreos-border bg-xcreos-surface p-5 shadow-none sm:p-6">
+      <div className="flex flex-col gap-4 border-b border-xcreos-border pb-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">ZIP table</p>
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">ZIP table</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-white">ZIP-level underwriting view</h3>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex rounded-full border border-[#2a2118] bg-[rgba(12,12,12,0.94)] p-1">
+          <div className="inline-flex rounded-md border border-xcreos-border bg-[#090909] p-1">
             {portfolioViews.map((option) => (
               <button
                 key={option.label}
@@ -552,7 +552,7 @@ function ResearchTable({ rows, totalRows, currentView, onViewChange }) {
                 onClick={() => onViewChange(option.value)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   currentView === option.value
-                    ? 'bg-xcreos-primary text-[#170d05]'
+                    ? 'bg-xcreos-primary text-black'
                     : 'text-xcreos-muted hover:text-white'
                 }`}
               >
@@ -560,7 +560,7 @@ function ResearchTable({ rows, totalRows, currentView, onViewChange }) {
               </button>
             ))}
           </div>
-          <div className="inline-flex items-center gap-3 rounded-full border border-[#2a2118] bg-[rgba(24,14,7,0.34)] px-3 py-2">
+          <div className="inline-flex items-center gap-3 rounded-md border border-xcreos-border bg-[#090909] px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-xcreos-primary" />
             <p className="text-sm text-xcreos-muted">
               {rows.length} of {totalRows} rows
@@ -590,32 +590,32 @@ function ResearchTable({ rows, totalRows, currentView, onViewChange }) {
               <tr
                 key={row.zip}
                 data-testid="research-table-row"
-                className="rounded-[1.45rem] bg-[linear-gradient(180deg,rgba(9,9,9,0.96),rgba(5,5,5,0.98))] text-sm text-white shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(0,0,0,0.28)]"
+                className="rounded-md bg-[#0b0b0b] text-sm text-white transition hover:bg-[#101010]"
               >
-                <td className="rounded-l-[1.45rem] border border-r-0 border-[#141414] px-4 py-4">
+                <td className="rounded-l-md border border-r-0 border-xcreos-border px-4 py-4">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex min-w-9 justify-center rounded-full border border-[#26211d] bg-white/[0.03] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-xcreos-muted">
+                    <span className="inline-flex min-w-9 justify-center rounded-md border border-xcreos-border bg-[#111111] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-xcreos-muted">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="text-base font-semibold text-white">{row.zip}</span>
                   </div>
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4">
                   <p className="font-semibold text-white">{row.city}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-xcreos-muted">{row.state}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.12em] text-xcreos-muted">{row.state}</p>
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-xcreos-muted">
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 text-xcreos-muted">
                   {row.metro}
                 </td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">{formatCompactCurrency(row.price)}</td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">{formatCurrency(row.rent)}</td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">{metricPercent(row.rentYield)}</td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">{metricPercent(row.appreciation1Y)}</td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">{formatCurrency(row.rentGap)}</td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 text-lg font-semibold text-xcreos-primary">{row.score.toFixed(1)}</td>
-                <td className="border border-l-0 border-r-0 border-[#141414] px-4 py-4 font-medium">{metricPercent(row.stability)}</td>
-                <td className="rounded-r-[1.45rem] border border-l-0 border-[#141414] px-4 py-4">
-                  <span className={`inline-flex rounded-full border px-3 py-2 text-xs font-semibold ${scoreBadge(row.score)}`}>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">{formatCompactCurrency(row.price)}</td>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">{formatCurrency(row.rent)}</td>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">{metricPercent(row.rentYield)}</td>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">{metricPercent(row.appreciation1Y)}</td>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">{formatCurrency(row.rentGap)}</td>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 text-lg font-semibold text-xcreos-primary">{row.score.toFixed(1)}</td>
+                <td className="border border-l-0 border-r-0 border-xcreos-border px-4 py-4 font-medium">{metricPercent(row.stability)}</td>
+                <td className="rounded-r-md border border-l-0 border-xcreos-border px-4 py-4">
+                  <span className={`inline-flex rounded-md border px-3 py-2 text-xs font-semibold ${scoreBadge(row.score)}`}>
                     {scoreLabel(row.score)}
                   </span>
                 </td>
@@ -631,9 +631,9 @@ function ResearchTable({ rows, totalRows, currentView, onViewChange }) {
 function ResearchCards({ rows }) {
   return (
     <section className="grid gap-4">
-      <div className="flex flex-col gap-3 rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-5 py-4 shadow-[0_8px_28px_rgba(0,0,0,0.24)] sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 rounded-md border border-xcreos-border bg-xcreos-surface px-5 py-4 shadow-none sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">Opportunity cards</p>
+          <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">Opportunity cards</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Ranked ZIP snapshots</h2>
         </div>
         <p className="text-sm text-xcreos-muted">{rows.length} cards shown</p>
@@ -642,15 +642,15 @@ function ResearchCards({ rows }) {
         {rows.map((row) => (
           <article
             key={row.zip}
-            className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.22)]"
+            className="rounded-md border border-xcreos-border bg-xcreos-surface p-5 shadow-none"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-xcreos-muted">{row.zip}</p>
+                <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">{row.zip}</p>
                 <h3 className="mt-2 text-xl font-semibold text-white">{row.city}, {row.state}</h3>
                 <p className="mt-1 max-w-xl truncate text-sm text-xcreos-muted">{row.metro}</p>
               </div>
-              <span className={`rounded-full border px-3 py-2 text-xs font-semibold ${scoreBadge(row.score)}`}>
+              <span className={`rounded-md border px-3 py-2 text-xs font-semibold ${scoreBadge(row.score)}`}>
                 {scoreLabel(row.score)}
               </span>
             </div>
@@ -659,25 +659,25 @@ function ResearchCards({ rows }) {
                 <span>Research Score</span>
                 <span className="text-xcreos-primary">{row.score.toFixed(1)}/100</span>
               </div>
-              <div className="mt-2 h-1.5 rounded-full bg-white/6">
+              <div className="mt-2 h-1.5 rounded-full bg-[#1f1f1f]">
                 <div className="h-full rounded-full bg-xcreos-primary" style={{ width: `${Math.min(row.score, 100)}%` }} />
               </div>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-xcreos-muted">Price</p>
+              <div className="rounded-md border border-xcreos-border bg-[#090909] p-3">
+                <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">Price</p>
                 <p className="mt-2 font-semibold text-white">{formatCompactCurrency(row.price)}</p>
               </div>
-              <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-xcreos-muted">Rent</p>
+              <div className="rounded-md border border-xcreos-border bg-[#090909] p-3">
+                <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">Rent</p>
                 <p className="mt-2 font-semibold text-white">{formatCurrency(row.rent)}</p>
               </div>
-              <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-xcreos-muted">Yield</p>
+              <div className="rounded-md border border-xcreos-border bg-[#090909] p-3">
+                <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">Yield</p>
                 <p className="mt-2 font-semibold text-white">{metricPercent(row.rentYield)}</p>
               </div>
-              <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-xcreos-muted">HUD Gap</p>
+              <div className="rounded-md border border-xcreos-border bg-[#090909] p-3">
+                <p className="text-[10px] uppercase tracking-[0.12em] text-xcreos-muted">HUD Gap</p>
                 <p className="mt-2 font-semibold text-white">{formatCurrency(row.rentGap)}</p>
               </div>
             </div>
@@ -743,8 +743,8 @@ export function ResearchDashboard({ dataRows = researchDataset.rows }) {
               <ResearchCards rows={displayedRows} />
             </>
           ) : (
-            <div className="rounded-[1.75rem] border border-dashed border-[#1a1a1a] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-6 py-12 text-center">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-xcreos-muted">No results</p>
+            <div className="rounded-md border border-dashed border-xcreos-border bg-xcreos-surface px-6 py-12 text-center">
+              <p className="text-[11px] uppercase tracking-[0.12em] text-xcreos-muted">No results</p>
               <h3 className="mt-3 text-2xl font-semibold text-white">No ZIPs match the current filters.</h3>
             </div>
           )}
