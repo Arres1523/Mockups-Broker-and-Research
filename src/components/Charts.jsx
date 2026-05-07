@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { geoAlbersUsa, geoPath } from 'd3-geo'
 import {
   Bar,
   BarChart,
@@ -8,6 +9,8 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { feature, mesh } from 'topojson-client'
+import usAtlas from 'us-atlas/states-10m.json'
 import {
   buildBrokerDistribution,
   buildPropertyComparisonSeries,
@@ -16,6 +19,12 @@ import { buildMarketMapPoints } from '../utils/marketMap'
 import { formatCompactCurrency, formatDscr, formatPercent } from '../utils/formatters'
 
 const marketColors = ['#FF7A0D', '#FF9640', '#FFB56F', '#FFD3AC', '#D57B2D']
+const mapWidth = 960
+const mapHeight = 560
+const stateGeoJson = feature(usAtlas, usAtlas.objects.states)
+const stateBorders = mesh(usAtlas, usAtlas.objects.states, (left, right) => left !== right)
+const projection = geoAlbersUsa().fitSize([mapWidth, mapHeight], stateGeoJson)
+const usaPath = geoPath(projection)
 
 function ChartShell({ title, subtitle, children, heightClassName = 'h-80' }) {
   return (
@@ -78,40 +87,6 @@ function ComparisonBarChart({ data, formatter, emptyMessage }) {
   )
 }
 
-function MarketShape() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="absolute inset-0 h-full w-full"
-      viewBox="0 0 1000 620"
-      fill="none"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <defs>
-        <linearGradient id="market-surface" x1="120" y1="120" x2="860" y2="520" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#1A140F" />
-          <stop offset="0.4" stopColor="#121212" />
-          <stop offset="1" stopColor="#090909" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M82 387L76 352L84 319L107 287L141 287L172 266L216 267L248 243L288 244L313 216L380 205L432 177L490 177L545 156L604 143L684 146L740 160L785 156L834 171L877 206L888 246L879 274L844 288L827 320L824 354L796 374L771 413L721 426L701 459L645 461L617 454L581 467L542 454L513 462L469 450L420 460L381 449L337 457L291 444L258 448L215 436L186 439L159 422L125 419L98 405L82 387Z"
-        fill="url(#market-surface)"
-        stroke="#2A2A2A"
-        strokeWidth="6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M139 454L171 438L201 450L200 482L168 494L144 486L139 454Z"
-        fill="url(#market-surface)"
-        stroke="#2A2A2A"
-        strokeWidth="6"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
 function MarketCoverageMap({ properties }) {
   const points = buildMarketMapPoints(properties)
   const [activeMarketId, setActiveMarketId] = useState(null)
@@ -125,12 +100,27 @@ function MarketCoverageMap({ properties }) {
   const totalMapped = points.reduce((sum, point) => sum + point.count, 0)
   const highlightedMarket = points.find((point) => point.market === activeMarketId) ?? topMarket
   const share = Math.round((highlightedMarket.count / totalMapped) * 100)
+  const projectedPoints = points
+    .map((point) => {
+      const coordinates = projection([point.longitude, point.latitude])
+
+      if (!coordinates) {
+        return null
+      }
+
+      return {
+        ...point,
+        x: coordinates[0],
+        y: coordinates[1],
+      }
+    })
+    .filter(Boolean)
 
   return (
     <div className="grid h-full min-h-0 gap-3 xl:grid-cols-[minmax(0,1.3fr)_220px]">
-      <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.18),_transparent_38%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
+      <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.16),_transparent_36%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
         <div
-          className="absolute inset-0 opacity-35"
+          className="absolute inset-0 opacity-30"
           style={{
             backgroundImage:
               'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
@@ -140,62 +130,92 @@ function MarketCoverageMap({ properties }) {
         <div className="absolute left-5 top-5 z-20 rounded-full border border-[#322115] bg-[rgba(33,18,8,0.52)] px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#b4977d]">
           Markets covered
         </div>
-        <div className="absolute inset-x-4 bottom-4 top-11">
-          <MarketShape />
-        </div>
-
-        <div className="absolute inset-x-4 bottom-4 top-11 z-20">
-          {points.map((point, index) => {
+        <svg
+          aria-label="United States market coverage map"
+          className="absolute inset-x-4 bottom-4 top-12 z-10 h-[calc(100%-4rem)] w-[calc(100%-2rem)]"
+          viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+          role="img"
+        >
+          <defs>
+            <linearGradient id="usa-state-fill" x1="140" y1="70" x2="810" y2="500" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#21150D" />
+              <stop offset="0.35" stopColor="#141414" />
+              <stop offset="1" stopColor="#090909" />
+            </linearGradient>
+            <filter id="map-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="7" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <g>
+            {stateGeoJson.features.map((state) => (
+              <path
+                key={state.id}
+                d={usaPath(state)}
+                fill="url(#usa-state-fill)"
+                stroke="#2B2B2B"
+                strokeWidth="0.8"
+              />
+            ))}
+            <path d={usaPath(stateBorders)} fill="none" stroke="#343434" strokeWidth="0.9" />
+          </g>
+          <g filter="url(#map-glow)">
+            {projectedPoints.map((point, index) => {
             const isActive = highlightedMarket.market === point.market
             const size = 14 + (point.count / maxCount) * 10
 
             return (
-              <button
+              <g
                 key={point.market}
-                type="button"
-                aria-label={`${point.market}: ${point.count} properties`}
-                className="group absolute -translate-x-1/2 -translate-y-1/2 text-left"
-                style={{ left: `${point.x}%`, top: `${point.y}%` }}
                 onMouseEnter={() => setActiveMarketId(point.market)}
                 onFocus={() => setActiveMarketId(point.market)}
                 onClick={() => setActiveMarketId(point.market)}
+                tabIndex={0}
+                role="button"
+                aria-label={`${point.market}: ${point.count} properties`}
+                className="cursor-pointer outline-none"
               >
-                <span
-                  className={`absolute left-1/2 top-1/2 rounded-full blur-md transition ${
-                    isActive ? 'opacity-80' : 'opacity-45 group-hover:opacity-70'
-                  }`}
-                  style={{
-                    width: `${size * 1.7}px`,
-                    height: `${size * 1.7}px`,
-                    transform: 'translate(-50%, -50%)',
-                    backgroundColor: 'rgba(255, 122, 13, 0.3)',
-                  }}
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r={size * 1.15}
+                  fill="rgba(255,122,13,0.18)"
+                  opacity={isActive ? 1 : 0.65}
                 />
-                <span
-                  className={`relative flex items-center justify-center rounded-full border border-[#f5d3ae]/30 font-semibold text-[#1d1208] shadow-[0_0_18px_rgba(255,122,13,0.28)] transition ${
-                    isActive ? 'scale-110' : 'group-hover:scale-105'
-                  }`}
-                  style={{
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    backgroundColor: marketColors[index % marketColors.length],
-                  }}
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r={isActive ? size * 0.62 : size * 0.5}
+                  fill={marketColors[index % marketColors.length]}
+                  stroke="#FFD3AC"
+                  strokeWidth="1.2"
+                />
+                <text
+                  x={point.x}
+                  y={point.y + 3.6}
+                  textAnchor="middle"
+                  className="pointer-events-none fill-[#160B03] text-[10px] font-bold"
                 >
-                  <span className="text-[10px]">{point.count}</span>
-                </span>
+                  {point.count}
+                </text>
                 {isActive ? (
-                  <span
-                    className={`pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.18em] transition ${
-                      isActive ? 'bg-[#f6dcc0] text-[#201207]' : 'bg-black/60 text-white/70'
-                    }`}
+                  <text
+                    x={point.x}
+                    y={point.y - size - 8}
+                    textAnchor="middle"
+                    className="pointer-events-none fill-[#F7D8B8] text-[11px] font-semibold"
                   >
                     {point.state}
-                  </span>
+                  </text>
                 ) : null}
-              </button>
+              </g>
             )
           })}
-        </div>
+          </g>
+        </svg>
       </div>
 
       <div className="grid min-h-0 auto-rows-min gap-3">

@@ -16,8 +16,8 @@ describe('buildMarketMapPoints', () => {
       count: 2,
       state: 'TX',
     })
-    expect(points[0].x).toBeGreaterThan(0)
-    expect(points[0].y).toBeGreaterThan(0)
+    expect(points[0].longitude).toBeLessThan(0)
+    expect(points[0].latitude).toBeGreaterThan(0)
     expect(points[1]).toMatchObject({
       market: 'PHOENIX, AZ',
       count: 1,
