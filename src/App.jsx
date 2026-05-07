@@ -41,7 +41,7 @@ const defaultFilters = {
   sortDirection: 'desc',
 }
 
-const propertyCardViews = [
+const portfolioViews = [
   { label: 'Top 5', value: 5 },
   { label: 'Top 10', value: 10 },
   { label: 'All', value: 'all' },
@@ -129,7 +129,7 @@ function App() {
   const [reason, setReason] = useState('missing-env')
   const [error, setError] = useState(null)
   const [filters, setFilters] = useState(defaultFilters)
-  const [propertyCardView, setPropertyCardView] = useState(10)
+  const [portfolioView, setPortfolioView] = useState(10)
   const deferredSearch = useDeferredValue(filters.search)
 
   useEffect(() => {
@@ -179,10 +179,10 @@ function App() {
   const banner = buildBanner(reason, error)
   const marketCount = new Set(properties.map((property) => property.market).filter(Boolean)).size
   const brokerCount = new Set(properties.map((property) => property.broker_name).filter(Boolean)).size
-  const propertyCards =
-    propertyCardView === 'all'
+  const displayedProperties =
+    portfolioView === 'all'
       ? visibleProperties
-      : visibleProperties.slice(0, propertyCardView)
+      : visibleProperties.slice(0, portfolioView)
 
   function handleFilterChange(field, value) {
     setFilters((current) => ({
@@ -237,7 +237,13 @@ function App() {
               <Suspense fallback={<ChartsLoadingState />}>
                 <Charts properties={visibleProperties} />
               </Suspense>
-              <PropertyTable properties={visibleProperties} />
+              <PropertyTable
+                properties={displayedProperties}
+                totalProperties={visibleProperties.length}
+                viewOptions={portfolioViews}
+                currentView={portfolioView}
+                onViewChange={setPortfolioView}
+              />
               <section className="grid gap-4">
                 <div className="flex flex-col gap-3 rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] px-5 py-4 shadow-[0_8px_28px_rgba(0,0,0,0.24)] sm:flex-row sm:items-center sm:justify-between">
                   <div>
@@ -248,30 +254,11 @@ function App() {
                       Ranked opportunity snapshots
                     </h2>
                   </div>
-                  <div className="inline-flex rounded-full border border-[#2a2118] bg-[rgba(12,12,12,0.94)] p-1">
-                    {propertyCardViews.map((option) => {
-                      const isActive = propertyCardView === option.value
-
-                      return (
-                        <button
-                          key={option.label}
-                          type="button"
-                          onClick={() => setPropertyCardView(option.value)}
-                          className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                            isActive
-                              ? 'bg-xcreos-primary text-[#170d05]'
-                              : 'text-xcreos-muted hover:text-white'
-                          }`}
-                        >
-                          {option.label}
-                        </button>
-                      )
-                    })}
-                  </div>
+                  <p className="text-sm text-xcreos-muted">{displayedProperties.length} cards shown</p>
                 </div>
 
                 <div className="grid gap-4 xl:grid-cols-2">
-                  {propertyCards.map((property) => (
+                  {displayedProperties.map((property) => (
                     <PropertyCard key={property.id} property={property} />
                   ))}
                 </div>

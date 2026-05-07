@@ -30,7 +30,7 @@ function scoreClassName(score) {
   return 'text-amber-300'
 }
 
-export function PropertyTable({ properties }) {
+export function PropertyTable({ properties, totalProperties, viewOptions, currentView, onViewChange }) {
   return (
     <section className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.22)] sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -40,9 +40,33 @@ export function PropertyTable({ properties }) {
             Comparable underwriting view
           </h3>
         </div>
-        <div className="inline-flex items-center gap-3 self-start rounded-full border border-[#2a2118] bg-[rgba(24,14,7,0.34)] px-3 py-2 sm:self-auto">
-          <span className="h-2 w-2 rounded-full bg-xcreos-primary" />
-          <p className="text-sm text-xcreos-muted">{properties.length} rows</p>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="inline-flex rounded-full border border-[#2a2118] bg-[rgba(12,12,12,0.94)] p-1">
+            {viewOptions.map((option) => {
+              const isActive = currentView === option.value
+
+              return (
+                <button
+                  key={option.label}
+                  type="button"
+                  onClick={() => onViewChange(option.value)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    isActive
+                      ? 'bg-xcreos-primary text-[#170d05]'
+                      : 'text-xcreos-muted hover:text-white'
+                  }`}
+                >
+                  {option.label}
+                </button>
+              )
+            })}
+          </div>
+          <div className="inline-flex items-center gap-3 rounded-full border border-[#2a2118] bg-[rgba(24,14,7,0.34)] px-3 py-2">
+            <span className="h-2 w-2 rounded-full bg-xcreos-primary" />
+            <p className="text-sm text-xcreos-muted">
+              {properties.length} of {totalProperties} rows
+            </p>
+          </div>
         </div>
       </div>
 

@@ -15,14 +15,14 @@ import {
 import { buildMarketMapPoints } from '../utils/marketMap'
 import { formatCompactCurrency, formatDscr, formatPercent } from '../utils/formatters'
 
-const marketColors = ['#FF6B00', '#FF8A3D', '#FFB169', '#FFD1A6', '#C76A24']
+const marketColors = ['#FF7A0D', '#FF9640', '#FFB56F', '#FFD3AC', '#D57B2D']
 
-function ChartShell({ title, subtitle, children }) {
+function ChartShell({ title, subtitle, children, heightClassName = 'h-80' }) {
   return (
-    <article className="rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
+    <article className="overflow-hidden rounded-[1.75rem] border border-[#171717] bg-[linear-gradient(180deg,rgba(11,11,11,0.98),rgba(7,7,7,0.98))] p-5 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
       <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">{subtitle}</p>
       <h3 className="mt-2 text-lg font-semibold text-white">{title}</h3>
-      <div className="mt-5 h-80">{children}</div>
+      <div className={`mt-5 ${heightClassName}`}>{children}</div>
     </article>
   )
 }
@@ -95,7 +95,7 @@ function MarketShape() {
         </linearGradient>
       </defs>
       <path
-        d="M83 403L91 369L80 336L96 292L125 294L167 268L206 270L237 243L286 246L310 214L377 208L436 180L497 182L543 156L616 146L706 149L781 173L853 167L883 184L902 228L896 260L854 273L839 306L836 344L796 364L780 411L760 438L703 439L683 473L628 478L598 469L558 479L513 465L478 472L435 458L389 471L330 453L295 455L251 440L228 449L199 445L171 420L141 420L113 414L83 403Z"
+        d="M82 387L76 352L84 319L107 287L141 287L172 266L216 267L248 243L288 244L313 216L380 205L432 177L490 177L545 156L604 143L684 146L740 160L785 156L834 171L877 206L888 246L879 274L844 288L827 320L824 354L796 374L771 413L721 426L701 459L645 461L617 454L581 467L542 454L513 462L469 450L420 460L381 449L337 457L291 444L258 448L215 436L186 439L159 422L125 419L98 405L82 387Z"
         fill="url(#market-surface)"
         stroke="#2A2A2A"
         strokeWidth="6"
@@ -127,8 +127,8 @@ function MarketCoverageMap({ properties }) {
   const share = Math.round((highlightedMarket.count / totalMapped) * 100)
 
   return (
-    <div className="grid h-full gap-4 lg:grid-cols-[minmax(0,1.65fr)_minmax(250px,0.95fr)]">
-      <div className="relative overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.18),_transparent_38%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
+    <div className="grid h-full min-h-0 gap-3 xl:grid-cols-[minmax(0,1.3fr)_220px]">
+      <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-[#22170f] bg-[radial-gradient(circle_at_top_left,_rgba(255,122,13,0.18),_transparent_38%),linear-gradient(180deg,_rgba(18,14,11,0.96),_rgba(7,7,7,0.98))]">
         <div
           className="absolute inset-0 opacity-35"
           style={{
@@ -140,12 +140,14 @@ function MarketCoverageMap({ properties }) {
         <div className="absolute left-5 top-5 z-20 rounded-full border border-[#322115] bg-[rgba(33,18,8,0.52)] px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#b4977d]">
           Markets covered
         </div>
-        <MarketShape />
+        <div className="absolute inset-x-4 bottom-4 top-11">
+          <MarketShape />
+        </div>
 
-        <div className="absolute inset-0 z-20">
+        <div className="absolute inset-x-4 bottom-4 top-11 z-20">
           {points.map((point, index) => {
             const isActive = highlightedMarket.market === point.market
-            const size = 16 + (point.count / maxCount) * 16
+            const size = 14 + (point.count / maxCount) * 10
 
             return (
               <button
@@ -163,8 +165,8 @@ function MarketCoverageMap({ properties }) {
                     isActive ? 'opacity-80' : 'opacity-45 group-hover:opacity-70'
                   }`}
                   style={{
-                    width: `${size * 1.9}px`,
-                    height: `${size * 1.9}px`,
+                    width: `${size * 1.7}px`,
+                    height: `${size * 1.7}px`,
                     transform: 'translate(-50%, -50%)',
                     backgroundColor: 'rgba(255, 122, 13, 0.3)',
                   }}
@@ -181,7 +183,7 @@ function MarketCoverageMap({ properties }) {
                 >
                   <span className="text-[10px]">{point.count}</span>
                 </span>
-                {index < 4 ? (
+                {isActive ? (
                   <span
                     className={`pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.18em] transition ${
                       isActive ? 'bg-[#f6dcc0] text-[#201207]' : 'bg-black/60 text-white/70'
@@ -196,11 +198,11 @@ function MarketCoverageMap({ properties }) {
         </div>
       </div>
 
-      <div className="grid gap-3">
+      <div className="grid min-h-0 auto-rows-min gap-3">
         <div className="rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
           <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Selected market</p>
           <h4 className="mt-2 text-xl font-semibold text-white">{highlightedMarket.market}</h4>
-          <div className="mt-4 grid grid-cols-2 gap-3">
+          <div className="mt-4 grid grid-cols-2 gap-2">
             <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3">
               <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Properties</p>
               <p className="mt-2 text-2xl font-semibold text-white">{highlightedMarket.count}</p>
@@ -212,7 +214,7 @@ function MarketCoverageMap({ properties }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2">
           <div className="rounded-[1.35rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
             <p className="text-[11px] uppercase tracking-[0.18em] text-xcreos-muted">Markets covered</p>
             <p className="mt-2 text-2xl font-semibold text-white">{points.length}</p>
@@ -223,20 +225,20 @@ function MarketCoverageMap({ properties }) {
           </div>
         </div>
 
-        <div className="rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
+        <div className="min-h-0 rounded-[1.45rem] border border-[#1d1d1d] bg-[linear-gradient(180deg,rgba(14,14,14,0.96),rgba(8,8,8,0.98))] p-4">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[11px] uppercase tracking-[0.22em] text-xcreos-muted">Top clusters</p>
-            <p className="text-xs text-xcreos-muted">{topMarket.market}</p>
+            <p className="truncate text-xs text-xcreos-muted">{topMarket.market}</p>
           </div>
-          <div className="mt-4 grid gap-3">
-            {points.slice(0, 5).map((point, index) => {
+          <div className="mt-4 grid gap-2">
+            {points.slice(0, 3).map((point, index) => {
               const pointShare = (point.count / maxCount) * 100
 
               return (
                 <button
                   key={point.market}
                   type="button"
-                  className={`grid gap-2 rounded-2xl border px-3 py-3 text-left transition ${
+                  className={`grid gap-2 rounded-2xl border px-3 py-2.5 text-left transition ${
                     highlightedMarket.market === point.market
                       ? 'border-xcreos-primary/35 bg-[rgba(255,122,13,0.08)]'
                       : 'border-white/6 bg-white/[0.02] hover:border-white/12'
@@ -250,7 +252,7 @@ function MarketCoverageMap({ properties }) {
                       <p className="text-sm font-semibold text-white">{point.market}</p>
                       <p className="text-xs uppercase tracking-[0.18em] text-xcreos-muted">{point.state}</p>
                     </div>
-                    <span className="text-lg font-semibold text-white">{point.count}</span>
+                    <span className="text-base font-semibold text-white">{point.count}</span>
                   </div>
                   <div className="h-1.5 rounded-full bg-white/6">
                     <div
@@ -278,6 +280,7 @@ export function Charts({ properties }) {
   const upsideSeries = buildPropertyComparisonSeries(properties, 'in_place_annual_upside')
   const expenseSeries = buildPropertyComparisonSeries(properties, 'expense_ratio_actual')
   const brokerSeries = buildBrokerDistribution(properties)
+  const hasDscrValues = properties.some((property) => Number.isFinite(property.dscr_current))
   const theme = chartTheme()
   const defaultEmptyMessage = 'No source-backed values are available for this metric.'
 
@@ -299,13 +302,15 @@ export function Charts({ properties }) {
         />
       </ChartShell>
 
-      <ChartShell title="DSCR by Property" subtitle="Debt coverage">
-        <ComparisonBarChart
-          data={dscrSeries}
-          formatter={formatDscr}
-          emptyMessage="No DSCR values were extracted from the current source files."
-        />
-      </ChartShell>
+      {hasDscrValues ? (
+        <ChartShell title="DSCR by Property" subtitle="Debt coverage">
+          <ComparisonBarChart
+            data={dscrSeries}
+            formatter={formatDscr}
+            emptyMessage="No DSCR values were extracted from the current source files."
+          />
+        </ChartShell>
+      ) : null}
 
       <ChartShell title="Annual Upside by Property" subtitle="Growth potential">
         <ComparisonBarChart
@@ -323,7 +328,7 @@ export function Charts({ properties }) {
         />
       </ChartShell>
 
-      <ChartShell title="Properties by Market" subtitle="Geographic split">
+      <ChartShell title="Properties by Market" subtitle="Geographic split" heightClassName="h-[28rem]">
         <MarketCoverageMap properties={properties} />
       </ChartShell>
 

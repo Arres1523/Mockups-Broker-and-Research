@@ -21,7 +21,7 @@ vi.mock('recharts', () => {
 import { Charts } from './Charts'
 
 describe('Charts', () => {
-  it('shows an explicit empty state when a comparison series has no values', () => {
+  it('hides the dscr section when no dscr values are available', () => {
     render(
       <Charts
         properties={[
@@ -36,10 +36,7 @@ describe('Charts', () => {
       />,
     )
 
-    expect(screen.getByText('DSCR by Property')).toBeInTheDocument()
-    expect(
-      screen.getByText('No DSCR values were extracted from the current source files.'),
-    ).toBeInTheDocument()
+    expect(screen.queryByText('DSCR by Property')).not.toBeInTheDocument()
   })
 
   it('renders the market map companion section for known markets', () => {
