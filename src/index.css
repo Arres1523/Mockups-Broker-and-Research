@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-xcreos-background: #030303;
+  --color-xcreos-surface: #0b0b0b;
+  --color-xcreos-primary: #ff7a0d;
+  --color-xcreos-primary-soft: #ffb169;
+  --color-xcreos-muted: #8b847d;
+  --color-xcreos-border: #1a1a1a;
+}
+
+:root {
+  color: #ffffff;
+  background: #000000;
+  font-family: 'Inter', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 122, 13, 0.14), transparent 24%),
+    radial-gradient(circle at 20% 0%, rgba(120, 62, 18, 0.12), transparent 32%),
+    linear-gradient(180deg, #050505 0%, #020202 100%);
+  color: #ffffff;
+}
+
+body::selection {
+  background: rgba(255, 107, 0, 0.35);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.xcreos-scrollbar {
+  scrollbar-color: rgba(255, 107, 0, 0.65) rgba(255, 255, 255, 0.04);
+  scrollbar-width: thin;
+}
+
+.xcreos-scrollbar::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.xcreos-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.xcreos-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, rgba(255, 122, 13, 0.82), rgba(255, 177, 105, 0.8));
+  border-radius: 999px;
+}
