@@ -15,6 +15,15 @@ dist-ssr
 __pycache__/
 *.pyc
 
+# secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -27,3 +36,4 @@ __pycache__/
 *.sw?
 
 .vercel
+.codex/
